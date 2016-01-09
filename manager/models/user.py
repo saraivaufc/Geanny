@@ -34,6 +34,8 @@ class Person(UserAuth):
 	def get_address(self):
 		return self.address
 
+	def is_member(self, group):
+		return self.groups.filter(name=group).exists()
 		
 	def save(self,group=None, *args, **kwargs):
 		super(Person, self).save(*args, **kwargs)

@@ -10,27 +10,15 @@ from manager.models import User, Attendee, Organizer
 from manager.management.permissions import group_permissions
 
 
-class LoginForm(ModelForm):
-	next = forms.CharField(widget=forms.HiddenInput)
-	user_cache = None
-
-	def is_valid(self):
-		super(LoginForm, self).is_valid()
-		try:
-			user = User.objects.get(username=self.cleaned_data['username'])
- 		except User.DoesNotExist:
-			self._errors['no_user'] = _('User does not exist')
-			print 'casa'
-			return False
- 		if not check_password(self.cleaned_data['password'], user.password):
-			self._errors['invalid_password'] = _('Password is invalid')
-			print 'papel'
-			return False
-		print 'tesoura'
-		return True
+class LoginForm(forms.Form):
+	username = forms.CharField(label=_('Username'), help_text=_("Please enter you username."),
+		widget=forms.TextInput(), 
+		error_messages={'required': _('Please enter you username.')} )
+	password = forms.CharField(label=_('Password'), help_text=_('Please enter you password.'),
+		widget=forms.PasswordInput(),
+		error_messages={'required': _('Please enter you password.')})
 
 	class Meta:
-		model= User
 		fields = ("username","password")
 
 class RegisterForm(ModelForm):

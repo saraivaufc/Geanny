@@ -5,7 +5,7 @@ class Index(object):
 	
 	def home(self, request):
 		return render(request, 'manager/index/home.html', {})
-
+		
 	def contact(self, request):
 		return HttpResponse("contact")
 

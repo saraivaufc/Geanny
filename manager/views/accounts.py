@@ -9,9 +9,6 @@ from django.contrib.auth import logout as auth_logout
 
 from manager.forms.accounts import LoginForm, RegisterForm, AttendeeRegisterForm, OrganizerRegisterForm
 from manager.management.permissions import group_permissions
-
-from django.contrib.auth.forms import AuthenticationForm
-
 from manager.views.index import Index
 
 
@@ -21,24 +18,23 @@ class Accounts(object):
 	def login(self, request):
 		try:
 			if request.method == 'GET': next = request.GET['next']
-			elif request.method == 'POST': next = request.POST['next']
 			else:
 				next = None
 		except:
 			next = None
 
+		if request.user.is_authenticated():
+			if next:
+				return HttpResponseRedirect(next)
+			else:
+				return HttpResponseRedirect(reverse('home'))
+
 		if request.method == 'POST':
 			form = LoginForm(request.POST)
 			if form.is_valid():
-				username =  form.cleaned_data['username']
-				password =  form.cleaned_data['password']
-				user = authenticate(username=username, password=password)
+				user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
 				login_user(request, user)
-				if request.user.is_authenticated():
-					if next:
-						return HttpResponseRedirect(next)
-					else:
-						return HttpResponseRedirect(reverse('home'))
+				return HttpResponseRedirect(reverse('home'))
 			else:
 				messages.error(request, _("Form no valid"))	
 		else:
@@ -46,7 +42,11 @@ class Accounts(object):
 		return render(request, 'manager/accounts/login.html', {'form': form})
 
 	def logout(self, request):
-		return HttpResponse("logout")
+		try:
+			auth_logout(request)
+		except Exception, e:
+			print e
+		return HttpResponseRedirect(reverse('login'))
 
 	def register(self, request):
 		if request.method == 'POST':
@@ -65,6 +65,7 @@ class Accounts(object):
 						user.set_password(user.password)
 						user.save(group=group)
 						messages.success(request, _("User created success."))
+						return HttpResponseRedirect(reverse('login'))
 					except Exception, e:
 						print e
 						messages.error(request, _("Created user error."))
