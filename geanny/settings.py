@@ -66,6 +66,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 #Templates
 TEMPLATE_DIRS = (
 	'manager/templates',
+	'manager/templates/manager/accounts',
 	'nocaptcha_recaptcha/templates',
 )
 

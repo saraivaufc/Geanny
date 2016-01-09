@@ -1,11 +1,14 @@
 {% extends 'manager/base.html' %}
 
+{% load i18n %}
+
 {% block content %}
 <a href="{% url 'home' %}">Home</a>
 
 	<form action="{% url 'login' %}"  method="POST" >{% csrf_token %}
-		{% include 'manager/__render_form.html' %}
+		{% include 'manager/_render_form.html' %}
 		<button type="submit">submit</button>
 	</form>
 	<a href="{% url 'register' %}">Register</a>
+	<a href="{% url 'reset_password_reset1' %}">{% trans "Forgot your password ?" %}</a>
 {% endblock %}

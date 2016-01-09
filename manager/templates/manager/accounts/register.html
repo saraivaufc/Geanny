@@ -2,7 +2,7 @@
 
 {% block content %}
 	<form action="{% url 'register' %}" method="POST">{% csrf_token %}
-		{% include 'manager/__render_form.html' %}
+		{% include 'manager/_render_form.html' %}
 		<button type="submit">submit</button>
 	</form>
 	<a href="{% url 'login' %}">Returno to login</a>
