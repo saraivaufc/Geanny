@@ -1,0 +1,9 @@
+{% extends 'manager/base.html' %}
+
+{% block content %}
+	<form action="{% url 'login' %}"  method="POST" >{% csrf_token %}
+		{% include 'manager/__render_form.html' %}
+		<button type="submit">submit</button>
+	</form>
+	<a href="{% url 'register' %}">Register</a>
+{% endblock %}
