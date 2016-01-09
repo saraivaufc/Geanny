@@ -27,9 +27,10 @@ class RegisterForm(ModelForm):
 		('organizer',_('Organizer')),
 	]
 	group = forms.ChoiceField(label=_("Group"), choices=GROUPS)
+	key = forms.CharField(label=_("Key"), max_length=4, required=False)
 	class Meta:
 		model= User
-		fields = ("first_name", "last_name","email", "username","password", "group")
+		fields = ("first_name", "last_name","email", "username","password", "group","key")
 
 class AttendeeRegisterForm(RegisterForm):
 	class Meta(RegisterForm.Meta):
