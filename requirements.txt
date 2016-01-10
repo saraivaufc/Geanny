@@ -3,7 +3,7 @@ django-rosetta==0.7.8
 Pillow==2.6.2
 python-social-auth==0.2.13
 django-nocaptcha-recaptcha==0.0.18
-
+oauthlib==1.0.3
 
 #NO USING PIP
 #sudo apt-get install postfix

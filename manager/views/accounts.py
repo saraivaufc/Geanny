@@ -34,8 +34,11 @@ class Accounts(object):
             form = LoginForm(request.POST)
             if form.is_valid():
                 user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
-                login_user(request, user)
-                return HttpResponseRedirect(reverse('home'))
+                try:
+                    login_user(request, user)
+                    return HttpResponseRedirect(reverse('home'))
+                except Exception, e:
+                    messages.error(request, _("Username or password incorrect."))
             else:
                 messages.error(request, _("Form no valid")) 
         else:

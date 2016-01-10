@@ -2,7 +2,9 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+import django.utils.timezone
 from django.conf import settings
+import manager.models.access
 
 
 class Migration(migrations.Migration):
@@ -12,6 +14,22 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.CreateModel(
+            name='OrganizerKey',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('key', models.CharField(default=manager.models.access.generate_key, max_length=100, verbose_name='Key')),
+                ('in_use', models.BooleanField(default=False, verbose_name='In Use')),
+                ('creation', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Creation')),
+                ('exists', models.BooleanField(default=True, verbose_name='Exists')),
+            ],
+            options={
+                'ordering': ['user'],
+                'verbose_name': 'Organizer Key',
+                'verbose_name_plural': 'Organizes Key',
+            },
+            bases=(models.Model,),
+        ),
         migrations.CreateModel(
             name='Person',
             fields=[
@@ -51,5 +69,17 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'Attendees',
             },
             bases=('manager.person',),
+        ),
+        migrations.AddField(
+            model_name='organizerkey',
+            name='creator',
+            field=models.ForeignKey(verbose_name='Creator', to='manager.Person'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='organizerkey',
+            name='user',
+            field=models.ForeignKey(related_name='Organizer', blank=True, to='manager.Organizer', null=True),
+            preserve_default=True,
         ),
     ]
