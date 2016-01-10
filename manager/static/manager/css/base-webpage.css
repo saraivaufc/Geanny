@@ -1,0 +1,21 @@
+.logo-name-header {
+	height: 100%;
+}
+
+.header-logo {
+	height: 100px;
+}
+
+.ripple-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.link-selected {
+	border-bottom-width: 5px;
+	border-bottom-style: inset;	
+}
+
+.mdl-navigation__link {
+	font-size: 24px;
+}

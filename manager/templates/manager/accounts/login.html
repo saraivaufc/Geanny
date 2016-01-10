@@ -1,17 +1,35 @@
-{% extends 'manager/base.html' %}
+{% extends 'manager/base-webpage.html' %}
 
+{% load staticfiles %}
 {% load i18n %}
 
-{% block content %}
-<a href="{% url 'home' %}">Home</a>
+{% block other-head %}
+	{{ block.super }}
+	<link rel="stylesheet" href="{% static 'manager/css/login.css' %}">
+{% endblock %}
 
-	<form action="{% url 'login' %}"  method="POST" >{% csrf_token %}
-		{% include 'manager/_render_form.html' %}
-		<button type="submit">submit</button>
-	</form>
-	<a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Facebook</a>
-	<a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">Gmail</a>
-	<a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">Twitte</a>
-	<a href="{% url 'register' %}">Register</a>
-	<a href="{% url 'reset_password_reset1' %}">{% trans "Forgot your password ?" %}</a>
+{% block content %}
+	<div class="mdl-grid">
+		<div class="mdl-cell--4-col mdl-color--white mdl-shadow--2dp login-card">
+		
+			<form action="{% url 'login' %}"  method="POST" >{% csrf_token %}
+				{% include 'manager/_render_form.html' %}
+				<button class="submit-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent" type="submit">{% trans "Login" %}</button>
+			</form>
+						
+			<div class="mdl-grid mdl-grid--no-spacing">
+				
+				<a class="mdl-cell mdl-cell--4-col mdl-button mdl-js-button mdl-js-ripple-effect " href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"><i class="mdl-color-text--indigo mdi mdi-facebook-box"> facebook</i></a>
+				<a class="mdl-cell mdl-cell--4-col mdl-button mdl-js-button mdl-js-ripple-effect " href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="mdl-color-text--red mdi mdi-gmail"> gmal</i></a>
+				<a class="mdl-cell mdl-cell--4-col mdl-button mdl-js-button mdl-js-ripple-effect " href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}"><i class="mdl-color-text--light-blue mdi mdi-twitter"> twitter</i></a>
+			
+			</div>
+			
+			<div class="content-login-bottom">
+				<a class="" href="{% url 'register' %}">Register</a>
+				<a class="reset-label" href="{% url 'reset_password_reset1' %}">{% trans "Forgot your password ?" %}</a>
+			</div>
+			
+		</div>
+	</div>
 {% endblock %}
