@@ -9,6 +9,9 @@
 		{% include 'manager/_render_form.html' %}
 		<button type="submit">submit</button>
 	</form>
+	<a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Facebook</a>
+	<a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">Gmail</a>
+	<a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">Twitte</a>
 	<a href="{% url 'register' %}">Register</a>
 	<a href="{% url 'reset_password_reset1' %}">{% trans "Forgot your password ?" %}</a>
 {% endblock %}
