@@ -1,0 +1,35 @@
+.login-card {
+	margin: auto auto;
+	padding: 40px;
+	margin-top: 40px;
+}
+
+.mdl-textfield {
+	width: 100%;
+}
+
+.submit-button {
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.reset-label {
+	float: right;
+}
+
+.content-login-bottom {
+	margin-top: 20px;
+	width: 100%;
+}
+
+.with-margin-right {
+	margin-right: 5px !important;	
+}
+
+.with-padding {
+	padding: 5px;
+}
+
+.fill-width {
+	width: 100%;
+}

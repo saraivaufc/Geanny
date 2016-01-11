@@ -1,0 +1,9 @@
+.event-card-square {
+	width: 90%;
+	height: 320px;
+	margin-bottom: 40px;	
+}
+
+.centered-container {
+	margin: auto auto;
+}

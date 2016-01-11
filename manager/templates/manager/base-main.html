@@ -7,6 +7,10 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="{% static 'manager/frameworks/mdl/material.min.css' %}">
+        <link rel="stylesheet" href="http://cdn.materialdesignicons.com/1.4.57/css/materialdesignicons.min.css">
+        
         {% block other-head %}{% endblock %}
     {% endblock %}
 </head>
@@ -25,6 +29,7 @@
 {% endblock %}
 
 {% block script %}
+	<script src="{% static 'manager/frameworks/mdl/material.min.js' %}"></script>
     {% block other-script %}{% endblock %}
 {% endblock %}
 

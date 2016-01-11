@@ -123,7 +123,7 @@ AUTHENTICATION_BACKENDS = (
 	'django.contrib.auth.backends.ModelBackend',
 )
 
-AUTH_USER_MODEL = 'auth.User'
+AUTH_USER_MODEL = 'manager.Person'
 
 LOGIN_URL = '/account/login/'
 LOGOUT_URL = '/account/logout/'
