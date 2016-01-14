@@ -3,9 +3,9 @@
 {% block content %}
 
 	<form action="{% if type == 'add' %}
-					{% url 'event_add' %}
+					{% url 'admin_event_add' %}
 				  {% elif type == 'edit' %}
-				  	{% url 'event_edit' event.id %}
+				  	{% url 'admin_event_edit' event.id %}
 				  {% else %}
 				  	.
 				  {% endif %}" method="POST" enctype="multipart/form-data">{% csrf_token %}

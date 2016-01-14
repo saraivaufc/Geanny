@@ -5,7 +5,7 @@ from manager.views.accounts import Accounts
 accounts = Accounts()
 
 urlpatterns = patterns('',
-	url(r'^$', accounts.login),
+	url(r'^$', accounts.login, name='login'),
 	url(r'^login/$', accounts.login, name='login'),
 	url(r'^logout/$', accounts.logout, name='logout'),
 	url(r'^register/$', accounts.register, name='register'),

@@ -6,4 +6,4 @@ from manager.models import Event
 class EventForm(ModelForm):
     class Meta:
     	model= Event
-        fields = ("name","description", "type", "address", "start_date", "end_date", "capacity", "value", "image")
+        fields = ("name","description", "type", "address", "start_date", "end_date", "capacity", "value", "image", "active")

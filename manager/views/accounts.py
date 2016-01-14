@@ -28,7 +28,7 @@ class Accounts(object):
             if next:
                 return HttpResponseRedirect(next)
             else:
-                return HttpResponseRedirect(reverse('home'))
+                return HttpResponseRedirect(reverse('content'))
 
         if request.method == 'POST':
             form = LoginForm(request.POST)
@@ -36,7 +36,7 @@ class Accounts(object):
                 user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
                 try:
                     login_user(request, user)
-                    return HttpResponseRedirect(reverse('home'))
+                    return HttpResponseRedirect(reverse('content'))
                 except Exception, e:
                     messages.error(request, _("Username or password incorrect."))
             else:

@@ -13,7 +13,7 @@
 
 	<div class="mdl-grid">
 	<h1>Administor</h1>
-	<a href="{% url 'event_add' %}">Add event</a>
+	<a href="{% url 'admin_event_add' %}">Add event</a>
 		<div class="mdl-cell mdl-cell--9-col centered-container mdl-grid ">
 			{% for event in events %}
 				<div class="mdl-cell mdl-cell--4-col">
@@ -35,7 +35,7 @@
 					    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
 					      {% trans "Subscribe" %}
 					    </a>
-					    <a href="{% url 'event_see' event.id %}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+					    <a href="{% url 'admin_event_see' event.id %}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
 					      {% trans "See more" %}
 					    </a>
 					  </div>

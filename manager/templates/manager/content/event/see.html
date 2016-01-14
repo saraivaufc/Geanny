@@ -2,9 +2,6 @@
 
 {% block content %}
 	<h1>See event</h1>
-	<a href="{% url 'admin_event_edit' event.id %}">Edit event</a>
-	<a href="{% url 'admin_event_remove' event.id %}">Remove event</a>
-	
 	<div class="mdl-grid">
 	<p>{{ event.get_name }}</p></br>
 	<p>{{ event.get_description }}</p></br>

@@ -10,7 +10,7 @@ from manager.utils.decorators import group_required
 
 class Index(object):
 	
-	def home(self, request):
+	def content(self, request):
 		if request.user.groups.filter(name='organizer').exists():
 			return HttpResponseRedirect(reverse('admin'))
 		elif request.user.groups.filter(name='attendee').exists():
