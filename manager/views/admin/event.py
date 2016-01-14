@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import permission_required
 from django.contrib import messages
 
-from manager.forms.admin import EventForm
+from manager.forms import EventForm, AddressForm
 from manager.models import Event as EventModel
 from manager.utils.decorators import group_required
 
@@ -34,16 +34,21 @@ class Event(object):
     @method_decorator(group_required('organizer'))
     def add(self, request):
         if request.method == "POST":
-            form = EventForm(request.POST, request.FILES)
-            if form.is_valid():
-                form.save()
+            form_address = AddressForm(request.POST, request.FILES, prefix='address')
+            form_event = EventForm(request.POST, request.FILES, prefix='event')
+            if form_address.is_valid() and form_event.is_valid():
+                address = form_address.save()
+                event = form_event.save(commit=False)
+                event.address = address
+                event.save()
                 messages.success(request, _('Successfully added event'))
                 return HttpResponseRedirect(reverse('admin'))
             else:
                 messages.error(request,_('Error adding event.'))
         else:
-            form = EventForm()
-        return render(request, 'manager/admin/event/form.html', {'form': form, 'type':'add'})
+            form_address = AddressForm(prefix='address')
+            form_event = EventForm(prefix='event')
+        return render(request, 'manager/admin/event/form.html', {'form_event': form_event, 'form_address': form_address, 'type':'add'})
     
 
     @method_decorator(login_required)
@@ -56,16 +61,22 @@ class Event(object):
             return HttpResponseRedirect(reverse('admin'))
 
         if request.method == 'POST':
-            form = EventForm(request.POST, request.FILES, instance=event)
-            if form.is_valid():
-                event = form.save()
-                messages.success(request, _("Successfully edited event"))
+            form_event = EventForm(request.POST, request.FILES, prefix='event', instance=event)
+            form_address = AddressForm(request.POST, request.FILES, prefix='address', instance=event.get_address())
+            if form_address.is_valid() and form_event.is_valid():
+                address = form_address.save()
+                event = form_event.save(commit=False)
+                event.address = address
+                event.save()
+                messages.success(request, _('Successfully edited event'))
                 return self.see(request, event.id)
+                
             else:
                 messages.error(request, _("Error when editing event"))
         else:
-            form = EventForm(instance=event)
-        return render(request, 'manager/admin/event/form.html', {'form': form,'event':event, 'type':'edit'})
+            form_address = AddressForm(prefix='address', instance=event.get_address())
+            form_event = EventForm(prefix='event', instance=event)
+        return render(request, 'manager/admin/event/form.html', {'form_event': form_event, 'form_address': form_address, 'event':event, 'type':'edit'})
         
 
     @method_decorator(login_required)

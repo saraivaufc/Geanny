@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import permission_required
 from django.contrib import messages
 
-from manager.forms.admin import ActivityForm
+from manager.forms import ActivityForm
 from manager.models import Event as EventModel
 from manager.models import Activity as ActivityModel
 from manager.utils.decorators import group_required

@@ -9,7 +9,12 @@
 				  {% else %}
 				  	.
 				  {% endif %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
-		{% include 'manager/_render_form.html' %}
+		{% with form_event as form %}
+			{% include 'manager/_render_form.html' %}
+		{% endwith %}
+		{% with form_address as form %}
+			{% include 'manager/_render_form.html' %}
+		{% endwith %}
 		<button type="submit">submit</button>
 	</form>
 

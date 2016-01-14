@@ -13,6 +13,15 @@
 	<p>{{ event.get_description }}</p></br>
 	<p>{{ event.get_start_date }}</p>
 
+	<h3>Endereço:</h3>
+	<h1>{{ event.get_address }}</h1>
+	{% with  event.get_address as address %}
+	<p>{{ address.get_cep }}</p></br>
+	<p>{{ address.get_street }}</p></br>
+	<p>{{ address.get_district }}</p>
+	<p>{{ address.get_city }}</p>
+	<p>{{ address.get_state}}</p>
+	{% endwith %}
 	<h3>Activies:</h3>
 	<ul>
 	{% for activity in event.get_activities %}

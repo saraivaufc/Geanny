@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import permission_required
 from django.contrib import messages
 
-from manager.forms.admin import ResourceForm
+from manager.forms import ResourceForm
 from manager.models import Event as EventModel
 from manager.models import Resource as ResourceModel
 from manager.utils.decorators import group_required

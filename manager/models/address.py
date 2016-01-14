@@ -13,9 +13,19 @@ class Address(models.Model):
     creation = models.DateTimeField(verbose_name=_(u'Creation'), default=timezone.now)
     exists = models.BooleanField(verbose_name=_(u"Exists"), default=True)
 
+    def get_cep(self):
+        return self.cep
+    def get_street(self):
+        return self.street
+    def get_district(self):
+        return self.district
+    def get_city(self):
+        return self.city
+    def get_state(self):
+        return self.state
 
     def __unicode__(self):
-        return self.name
+        return self.cep
 
     def delete(self):
         self.exists = False
