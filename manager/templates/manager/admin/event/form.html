@@ -2,7 +2,13 @@
 
 {% block content %}
 
-	<form action="{% url 'event_add' %}" method="POST">{% csrf_token %}
+	<form action="{% if type == 'add' %}
+					{% url 'event_add' %}
+				  {% elif type == 'edit' %}
+				  	{% url 'event_edit' event.id %}
+				  {% else %}
+				  	.
+				  {% endif %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
 		{% include 'manager/_render_form.html' %}
 		<button type="submit">submit</button>
 	</form>

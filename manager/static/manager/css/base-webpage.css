@@ -19,3 +19,9 @@
 .mdl-navigation__link {
 	font-size: 24px;
 }
+
+.card-image{
+	background-repeat:no-repeat;
+	background-size:100%;
+	background-position: center;
+}
