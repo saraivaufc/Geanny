@@ -17,12 +17,9 @@ class Index(object):
 	def content(self, request):
 		if request.user.groups.filter(name='organizer').exists():
 			return HttpResponseRedirect(reverse('admin'))
-		elif request.user.groups.filter(name='attendee').exists():
+		else:
 			events = Event.objects.filter(exists=True, active=True)
 			return render(request, 'manager/index/home.html', {'events': events})
-		else:
-			return HttpResponseRedirect(reverse('login'))
-			
 	
 	@method_decorator(login_required)
 	@method_decorator(group_required('organizer'))
