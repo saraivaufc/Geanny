@@ -3,6 +3,7 @@
 {% block content %}
 	<h1>See event</h1>
 	<a href="{% url 'admin_activity_add' event.id %}">Add Activity</a>
+	<a href="{% url 'admin_resource_add' event.id %}">Add Resource</a>
 	
 	<a href="{% url 'admin_event_edit' event.id %}">Edit event</a>
 	<a href="{% url 'admin_event_remove' event.id %}">Remove event</a>
@@ -19,4 +20,13 @@
 	{% endfor %}
 	</ul>
 	</div>
+
+	<h3>Resources:</h3>
+	<ul>
+	{% for resource in event.get_resources %}
+		<li>{{ resource.get_name }}<a href="{% url 'admin_resource_see' resource.id %}">See</a></li>
+	{% endfor %}
+	</ul>
+	</div>
+
 {% endblock %}

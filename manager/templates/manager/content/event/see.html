@@ -7,4 +7,11 @@
 	<p>{{ event.get_description }}</p></br>
 	<p>{{ event.get_start_date }}</p>
 	</div>
+	<h1>Activities</h1>
+	<ul>
+	{% for activity in event.get_activities_active %}
+		<li>{{ activity.get_name }}<a href="{% url 'content_activity_see' activity.id %}">See</a></li>
+	{% endfor %}
+	</ul>
+	</div>
 {% endblock %}

@@ -15,8 +15,9 @@ class Resource(models.Model):
         ('NORMAL', _('Normal')),
         ('HIGH', _('High')), 
     )
+
     event = models.ForeignKey('Event', verbose_name=_("Event"))
-    activity = models.ForeignKey('Activity', verbose_name=_("Activity"))
+    activities = models.ManyToManyField('Activity', verbose_name=_("Activities"), null=True, blank=True)
     
     name = models.CharField(max_length=255, verbose_name=_(u"Name"), help_text=_(u'Please enter the name of the resource.'))
     description = models.TextField(verbose_name=_(u"Description"), help_text=_(u'Please enter a description of the resource.'))
@@ -30,6 +31,25 @@ class Resource(models.Model):
     creation = models.DateTimeField(verbose_name=_(u'Creation'), default=timezone.now)
     exists = models.BooleanField(verbose_name=_(u"Exists"), default=True)
         
+    def get_event(self):
+        return self.event
+    def get_activities(self):
+        return self.activities.objects.filter(exists=True)
+    def get_name(self):
+        return self.name
+    def get_description(self):
+        return self.description
+    def get_type(self):
+        return self.type
+    def get_priority(self):
+        return self.priority
+    def get_value(self):
+        return self.value
+    def get_quantity(self):
+        return self.get_quantity
+    def get_image(self):
+        return self.image  
+
     def __unicode__(self):
         return self.name
 
@@ -43,5 +63,5 @@ class Resource(models.Model):
     
     class Meta:
         ordering = ['creation']
-        verbose_name = _(u"Activity")
-        verbose_name_plural = _(u"Activitis")
+        verbose_name = _(u"Resource")
+        verbose_name_plural = _(u"Resources")

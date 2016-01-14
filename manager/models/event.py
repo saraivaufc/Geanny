@@ -42,6 +42,15 @@ class Event(models.Model):
     def get_activities(self):
         from manager.models import Activity
         return Activity.objects.filter(event=self.id, exists=True)
+    def get_resources(self):
+        from manager.models import Resource
+        return Resource.objects.filter(event=self.id, exists=True)
+    def get_activities_active(self):
+        from manager.models import Activity
+        return Activity.objects.filter(event=self.id, active=True , exists=True)
+    def get_resources_active(self):
+        from manager.models import Resource
+        return Resource.objects.filter(event=self.id, active=True ,exists=True)
 
 
 

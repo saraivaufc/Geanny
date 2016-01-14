@@ -8,4 +8,5 @@ urlpatterns = patterns('',
 	url(r'^$', index.admin, name="admin"),
     url(r'^event/', include('manager.urls.admin.event')),
     url(r'^activity/', include('manager.urls.admin.activity')),
+    url(r'^resource/', include('manager.urls.admin.resource')),
 )

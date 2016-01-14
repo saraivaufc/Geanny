@@ -247,7 +247,7 @@ class Migration(migrations.Migration):
                 ('active', models.BooleanField(default=False, help_text='Please check this box if you want to publish your resource.', verbose_name='Active')),
                 ('creation', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Creation')),
                 ('exists', models.BooleanField(default=True, verbose_name='Exists')),
-                ('activity', models.ForeignKey(verbose_name='Activity', to='manager.Activity')),
+                ('activities', models.ManyToManyField(to='manager.Activity', null=True, verbose_name='Activities', blank=True)),
                 ('event', models.ForeignKey(verbose_name='Event', to='manager.Event')),
             ],
             options={
