@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 from django.utils.translation import ugettext_lazy as _
 
-
 #Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from django.conf import global_settings
 import os, sys
@@ -56,7 +55,11 @@ THIRD_PARTY_APPS = (
 	'rosetta',
 	'nocaptcha_recaptcha',
 	'social.apps.django_app.default',
+	'cep',
+	'paypal.standard.ipn',
 )
+
+PAYPAL_RECEIVER_EMAIL = "saraiva.ufc@gmail.com"
 
 LOCAL_APPS = (
 	'manager',
@@ -123,10 +126,10 @@ AUTHENTICATION_BACKENDS = (
 	'django.contrib.auth.backends.ModelBackend',
 )
 
-AUTH_USER_MODEL = 'auth.User'
+AUTH_USER_MODEL = 'manager.Person'
 
-LOGIN_URL = '/account/login/'
-LOGOUT_URL = '/account/logout/'
+LOGIN_URL = '/accounts/login/'
+LOGOUT_URL = '/accounts/logout/'
 
 #Recaptca
 NORECAPTCHA_SITE_KEY  = "6LdVnQ0TAAAAAAwnuLsezpZwIRFhdqs-yrwdmG3n"

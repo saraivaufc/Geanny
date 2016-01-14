@@ -1,0 +1,12 @@
+{% extends 'manager/base-webpage.html' %}
+
+{% block content %}
+	<h1>See resource</h1>
+	<a href="{% url 'admin_resource_edit' resource.id %}">Edit resource</a>
+	<a href="{% url 'admin_resource_remove' resource.id %}">Remove resource</a>
+	
+	<div class="mdl-grid">
+	<p>{{ resource.get_name }}</p></br>
+	<p>{{ resource.get_description }}</p></br>
+	</div>
+{% endblock %}

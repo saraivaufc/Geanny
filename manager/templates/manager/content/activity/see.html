@@ -1,0 +1,9 @@
+{% extends 'manager/base-webpage.html' %}
+
+{% block content %}
+	<h1>See activity</h1>
+	<div class="mdl-grid">
+	<p>{{ activity.get_name }}</p></br>
+	<p>{{ activity.get_description }}</p></br>
+	</div>
+{% endblock %}

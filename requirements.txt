@@ -3,9 +3,11 @@ django-rosetta==0.7.8
 Pillow==2.6.2
 python-social-auth==0.2.13
 django-nocaptcha-recaptcha==0.0.18
+oauthlib==1.0.3
+django-cep==1.0.9
+django-paypal==0.2.7
 
 
-#NO USING PIP
 #sudo apt-get install postfix
 #sudo aptitude install libapache2-mod-wsgi
 #sudo apt-get install python-dev or sudo apt-get install python3-dev

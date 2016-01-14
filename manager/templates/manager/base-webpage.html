@@ -20,6 +20,7 @@
         
     	{% include 'manager/navbars/navbar-main.html' %}    
 	    
+<<<<<<< HEAD
 	    {% if request.user.is_authenticated %}
 			{% include 'manager/navigation-drawer/navigation-drawer-all-screen.html' %}
 		{% else %}
@@ -30,6 +31,36 @@
 	    <main class="mdl-layout__content mdl-color--grey-100">
 	        {% block content %}{% endblock %}
 	    </main>
+=======
+	    <div class="mdl-layout__header-row mdl-color--grey-200">
+	      <nav class="mdl-navigation mdl-layout--large-screen-only">
+	        
+	        <a
+	        	class="mdl-navigation__link
+	        	{% if home %} link-selected mdl-color-text--pink
+	        	{% else %} mdl-color-text--grey-700 {% endif %} mdl-js-ripple-effect ripple-container" href="{% url 'content' %}">
+	        	<span class="mdl-ripple"></span>
+	        	{% trans 'Home' %}
+	        </a>
+	        
+	        {% block header-left-links %}{% endblock %}
+	      </nav>
+	      <div class="mdl-layout-spacer"></div>
+	      <nav class="mdl-navigation mdl-layout--large-screen-only">	      
+	        
+	        <div>
+	        {% if request.user.is_authenticated %}
+				<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-700" href="{% url 'logout' %}">Logout</a>
+				
+			{% else %}
+				<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-700" href="{% url 'login' %}">Login</a>
+			{% endif %}
+			</div>
+	        
+	        {% block header-right-links %}{% endblock %}
+	      </nav>
+	    </div>
+>>>>>>> 91e45e43a10dc5a5ccbadd45ca9a05784d41ebb8
 	    
 	</div>
 	

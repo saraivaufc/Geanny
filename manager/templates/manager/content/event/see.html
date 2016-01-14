@@ -1,0 +1,28 @@
+{% extends 'manager/base-webpage.html' %}
+
+{% block content %}
+	<h1>See event</h1>
+	<div class="mdl-grid">
+	<p>{{ event.get_name }}</p></br>
+	<p>{{ event.get_description }}</p></br>
+	<p>{{ event.get_start_date }}</p>
+	</div>
+
+	<h3>Endereço:</h3>
+	<h1>{{ event.get_address }}</h1>
+	{% with  event.get_address as address %}
+	<p>{{ address.get_cep }}</p></br>
+	<p>{{ address.get_street }}</p></br>
+	<p>{{ address.get_district }}</p>
+	<p>{{ address.get_city }}</p>
+	<p>{{ address.get_state}}</p>
+	{% endwith %}
+
+	<h1>Activities</h1>
+	<ul>
+	{% for activity in event.get_activities_active %}
+		<li>{{ activity.get_name }}<a href="{% url 'content_activity_see' activity.id %}">See</a></li>
+	{% endfor %}
+	</ul>
+	</div>
+{% endblock %}

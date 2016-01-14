@@ -1,1 +1,19 @@
-<h1>Administracion</h1>
+{% extends 'manager/base-webpage.html' %}
+
+{% load staticfiles %}
+{% load manager_tags %}
+{% load i18n %}
+
+{% block other-head %}
+	{{ block.super }}
+	<link rel="stylesheet" href="{% static 'manager/css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+
+	<div class="mdl-grid">
+	<h1>Administor</h1>
+		<a href="{% url 'admin_event_see_all' %}">Seee Events</a>
+	</div>
+
+{% endblock %}
