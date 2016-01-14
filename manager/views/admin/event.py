@@ -15,6 +15,12 @@ class Event(object):
     
     @method_decorator(login_required)
     @method_decorator(group_required('organizer'))
+    def see_all(self, request):
+        events = EventModel.objects.filter(exists=True)
+        return render(request, 'manager/admin/event/see_all.html', {'events': events})
+
+    @method_decorator(login_required)
+    @method_decorator(group_required('organizer'))
     def see(self, request, event_id):
         try:
             event = EventModel.objects.get(id=event_id, exists=True)
