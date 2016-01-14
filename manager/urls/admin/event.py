@@ -9,4 +9,5 @@ urlpatterns = patterns('',
 	url(r'^add/$', event.add, name="admin_event_add"),
 	url(r'^edit/(?P<event_id>\d+)/$', event.edit, name="admin_event_edit"),
 	url(r'^remove/(?P<event_id>\d+)/$', event.remove, name="admin_event_remove"),
+	
 )

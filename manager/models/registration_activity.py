@@ -3,6 +3,7 @@ from django.utils.translation import ugettext as _
 from django.utils import timezone
 
 class RegistrationActivity(models.Model):
+    activity = models.ForeignKey('Activity', verbose_name=_("Activity"))
     attendee = models.ForeignKey('attendee', verbose_name=_(u'Attendee'))
     accredited = models.BooleanField(default=False, verbose_name=_(u'Accredited'))
     registration_date = models.DateTimeField(verbose_name=_(u'Registration Date'), default=timezone.now)

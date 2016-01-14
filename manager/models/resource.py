@@ -15,6 +15,9 @@ class Resource(models.Model):
         ('NORMAL', _('Normal')),
         ('HIGH', _('High')), 
     )
+    event = models.ForeignKey('Event', verbose_name=_("Event"))
+    activity = models.ForeignKey('Activity', verbose_name=_("Activity"))
+    
     name = models.CharField(max_length=255, verbose_name=_(u"Name"), help_text=_(u'Please enter the name of the resource.'))
     description = models.TextField(verbose_name=_(u"Description"), help_text=_(u'Please enter a description of the resource.'))
     type = models.CharField(max_length=255, verbose_name=_(u'Type'), choices=RESOURCE_TYPE, help_text=_(u'Please enter the type of resource.'))

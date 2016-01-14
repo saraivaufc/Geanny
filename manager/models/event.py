@@ -17,10 +17,6 @@ class Event(models.Model):
     value = models.FloatField(verbose_name=_(u'Value'),default=0.0, help_text=_(u'Please choose the registration fee.'))
     image = models.ImageField(verbose_name=_(u"Image"),help_text=_(u'Please choose an image for the profile of your event.'),upload_to = 'documents/image/event/%Y/%m/%d', null=True, blank=True, default=None)        
     
-    activities = models.ManyToManyField('Activity',verbose_name=_(u'Activities'),related_name=_("Activities"), null=True, blank=True)
-    resources = models.ManyToManyField('Resource',verbose_name=_(u'EventResources'),related_name=_("Resources"), null=True, blank=True)
-    registrations = models.ManyToManyField('RegistrationEvent', verbose_name=_(u'Registrations'))
-    
     active = models.BooleanField(verbose_name=_(u'Active'), default=False, help_text=_(u'Please check this box if you want to publish your event.'))
     creation = models.DateTimeField(verbose_name=_(u'Creation'), default=timezone.now)
     exists = models.BooleanField(verbose_name=_(u"Exists"), default=True)
@@ -43,6 +39,11 @@ class Event(models.Model):
         return self.value
     def get_image(self):
         return self.image
+    def get_activities(self):
+        from manager.models import Activity
+        return Activity.objects.filter(event=self.id, exists=True)
+
+
 
     def __unicode__(self):
         return self.name

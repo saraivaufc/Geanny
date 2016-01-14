@@ -51,12 +51,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Activity',
             fields=[
-                ('code', models.AutoField(serialize=False, verbose_name='code', primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(help_text='Please enter the name of the activity.', max_length=255, verbose_name='Name')),
                 ('description', models.TextField(help_text='Please enter a description of the activity.', verbose_name='Description')),
                 ('type', models.CharField(help_text='Please enter the type of your event.', max_length=255, verbose_name='Type', choices=[(b'LECTURE', 'Lecture'), (b'COURSE', 'Course')])),
-                ('start_hour', models.DateField(help_text='Please enter the starting hour of the activity.', verbose_name='Start Hour')),
-                ('end_hour', models.DateField(help_text='Please enter the end date of the event.', verbose_name='End Hour')),
+                ('start_hour', models.TimeField(help_text='Please enter the starting hour of the activity.', verbose_name='Start Hour')),
+                ('end_hour', models.TimeField(help_text='Please enter the end date of the activity.', verbose_name='End Hour')),
                 ('value', models.FloatField(default=0.0, help_text='Please choose the registration fee.', verbose_name='Value')),
                 ('image', models.ImageField(default=None, upload_to=b'documents/image/activity/%Y/%m/%d', blank=True, help_text='Please choose an image for the profile of your activity.', null=True, verbose_name='Imagem')),
                 ('capacity', models.IntegerField(help_text='Please ability of people to your activity supports.', verbose_name='Capacity')),
@@ -105,10 +105,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Event',
             fields=[
-                ('code', models.AutoField(serialize=False, verbose_name='code', primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(help_text='Please enter the name of the activity.', max_length=255, verbose_name='Name')),
                 ('description', models.TextField(help_text='Please enter a description of the activity.', verbose_name='Description')),
-                ('type', models.CharField(help_text='Please enter the type of your event.', max_length=9, verbose_name='Type', choices=[(b'PRESENTIAL', 'Presential'), (b'ONLINE', 'Online')])),
+                ('type', models.CharField(help_text='Please enter the type of your event.', max_length=100, verbose_name='Type', choices=[(b'PRESENTIAL', 'Presential'), (b'ONLINE', 'Online')])),
                 ('start_date', models.DateField(help_text='Please enter the starting date of the event.', verbose_name='Start Date')),
                 ('end_date', models.DateField(help_text='Please enter the end date of the event.', verbose_name='End Date')),
                 ('capacity', models.IntegerField(help_text='Please ability of people to your event supports.', verbose_name='Capacity')),
@@ -117,7 +117,6 @@ class Migration(migrations.Migration):
                 ('active', models.BooleanField(default=False, help_text='Please check this box if you want to publish your event.', verbose_name='Active')),
                 ('creation', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Creation')),
                 ('exists', models.BooleanField(default=True, verbose_name='Exists')),
-                ('activities', models.ManyToManyField(related_name='Activities', null=True, verbose_name='Activities', to='manager.Activity', blank=True)),
                 ('address', models.ForeignKey(verbose_name='Address', blank=True, to='manager.Address', null=True)),
             ],
             options={
@@ -177,7 +176,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Payment',
             fields=[
-                ('code', models.AutoField(serialize=False, verbose_name='code', primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('value', models.FloatField(default=0.0, verbose_name='Value')),
                 ('is_maturity', models.BooleanField(default=False, verbose_name='Maturity')),
                 ('maturity_date', models.DateTimeField(verbose_name='Maturity Date')),
@@ -199,11 +198,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='RegistrationActivity',
             fields=[
-                ('code', models.AutoField(serialize=False, verbose_name='code', primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('accredited', models.BooleanField(default=False, verbose_name='Accredited')),
                 ('registration_date', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Registration Date')),
                 ('creation', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Creation')),
                 ('exists', models.BooleanField(default=True, verbose_name='Exists')),
+                ('activity', models.ForeignKey(verbose_name='Activity', to='manager.Activity')),
                 ('attendee', models.ForeignKey(verbose_name='Attendee', to='manager.Attendee')),
                 ('payments', models.ManyToManyField(default=None, to='manager.Payment', verbose_name='Payments')),
             ],
@@ -217,12 +217,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='RegistrationEvent',
             fields=[
-                ('code', models.AutoField(serialize=False, verbose_name='code', primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('accredited', models.BooleanField(default=False)),
                 ('registration_date', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Creation')),
                 ('creation', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Creation')),
                 ('exists', models.BooleanField(default=True, verbose_name='Exists')),
                 ('attendee', models.ForeignKey(verbose_name='Attendee', to='manager.Attendee')),
+                ('event', models.ForeignKey(verbose_name='Event', to='manager.Event')),
                 ('payments', models.ManyToManyField(default=None, to='manager.Payment', verbose_name='Payments')),
             ],
             options={
@@ -235,7 +236,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Resource',
             fields=[
-                ('code', models.AutoField(serialize=False, verbose_name='code', primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(help_text='Please enter the name of the resource.', max_length=255, verbose_name='Name')),
                 ('description', models.TextField(help_text='Please enter a description of the resource.', verbose_name='Description')),
                 ('type', models.CharField(help_text='Please enter the type of resource.', max_length=255, verbose_name='Type', choices=[(b'LECTURE', 'Lecture'), (b'COURSE', 'Course'), (b'INSTRUCTOR', 'Instructor'), (b'MATERIAL', 'Material'), (b'ROOM', 'Room')])),
@@ -246,6 +247,8 @@ class Migration(migrations.Migration):
                 ('active', models.BooleanField(default=False, help_text='Please check this box if you want to publish your resource.', verbose_name='Active')),
                 ('creation', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Creation')),
                 ('exists', models.BooleanField(default=True, verbose_name='Exists')),
+                ('activity', models.ForeignKey(verbose_name='Activity', to='manager.Activity')),
+                ('event', models.ForeignKey(verbose_name='Event', to='manager.Event')),
             ],
             options={
                 'ordering': ['creation'],
@@ -255,39 +258,15 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.AddField(
-            model_name='event',
-            name='registrations',
-            field=models.ManyToManyField(to='manager.RegistrationEvent', verbose_name='Registrations'),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='event',
-            name='resources',
-            field=models.ManyToManyField(related_name='Resources', null=True, verbose_name='EventResources', to='manager.Resource', blank=True),
-            preserve_default=True,
-        ),
-        migrations.AddField(
             model_name='activity',
-            name='registrations',
-            field=models.ManyToManyField(related_name='Registrations', null=True, verbose_name='Registrations', to='manager.RegistrationActivity', blank=True),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='activity',
-            name='resources',
-            field=models.ManyToManyField(related_name='ActivityResources', null=True, verbose_name='Resources', to='manager.Resource', blank=True),
+            name='event',
+            field=models.ForeignKey(verbose_name='Event', to='manager.Event'),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='person',
             name='groups',
             field=models.ManyToManyField(related_query_name='user', related_name='user_set', to='auth.Group', blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of his/her group.', verbose_name='groups'),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='person',
-            name='user',
-            field=models.OneToOneField(to=settings.AUTH_USER_MODEL),
             preserve_default=True,
         ),
         migrations.AddField(
