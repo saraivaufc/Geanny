@@ -1,0 +1,45 @@
+{% load staticfiles %}
+{% load i18n %}
+
+<style>
+
+	.back-image {
+		background-image:url("{% static 'manager/img/logo2.png' %}");
+		background-repeat:no-repeat;
+		background-size:cover;
+		background-position: center;
+		background-color: #CCC;
+	}
+	
+	.ripple-container {
+	    position: relative;
+	    overflow: hidden;
+	}
+	
+</style>
+
+<div class="mdl-cell mdl-cell--4-col">
+	<div class="event-card-square mdl-card mdl-shadow--2dp">
+	  <div class="mdl-card__title mdl-card--expand back-image mdl-button mdl-js-ripple-effect ripple-container">
+	  	<span class="mdl-ripple"></span>
+	    <h2 class="mdl-card__title-text mdl-color-text--white">Title</h2>
+	  </div>
+	  <div class="mdl-card__supporting-text">
+	    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+	    Aenan convallis.
+	  </div>
+	  <div class="mdl-card__actions mdl-card--border">
+	    
+	    {% if request.user.is_authenticated %}
+			<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+		      Subscribe
+		    </a>
+		{% endif %}
+	    
+	    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+	      See more
+	    </a>
+	    
+	  </div>
+	</div>
+</div>

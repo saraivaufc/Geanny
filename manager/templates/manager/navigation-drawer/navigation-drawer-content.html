@@ -1,0 +1,137 @@
+{% load staticfiles %}
+{% load i18n %}
+
+<style>
+
+	.mdl-layout__drawer-button > i {
+		color: #757575;
+	}
+	
+	.mdl-layout__drawer-button {
+		background: #fff !important;
+		background-color: #fff !important;
+	}
+	
+	.custon-drawer-header {
+		padding: 20px;
+	}
+	
+	.custon-avatar-cropper {
+	    width: 100px;
+	    height: 100px;
+	    position: relative;
+	    overflow: hidden;
+	    border-radius: 50%;
+	    margin-bottom: 20px;
+	}
+	
+	.custon-avatar {
+	    display: inline;
+	    margin: 0 auto;
+	    height: 100%;
+	    width: auto;
+	}
+	
+	.custon-avatar-dropdown {
+		display: -webkit-box;
+	    display: -webkit-flex;
+	    display: -ms-flexbox;
+	    display: flex;
+	   position: relative;
+	     -webkit-box-orient: horizontal;
+	  -webkit-box-direction: normal;
+	 -webkit-flex-direction: row;
+	     -ms-flex-direction: row;
+	         flex-direction: row;
+	      -webkit-box-align: center;
+	    -webkit-align-items: center;
+	         -ms-flex-align: center;
+	            align-items: center;
+	  	width: 100%;
+	}
+		
+	.drawer-menu-item {
+	    vertical-align: middle !important;
+	}
+	
+	.drawer-icon {
+	    vertical-align: middle !important;
+	    margin-right: 10px !important;
+	}
+	
+	/* Navigation */
+	
+	.custon-nav {
+		-webkit-box-flex: 1;
+	   -webkit-flex-grow: 1;
+	   -ms-flex-positive: 1;
+	           flex-grow: 1;
+	}
+	
+	.custon-link-selected { 
+	    border-left-style: solid;
+	    border-left-width: 5px;
+	    border-left-color: #E91E63; 
+	}
+	
+	.custon-link-unselected { 
+	    border-left-style: solid;
+	    border-left-width: 5px;
+	    border-left-color: white; 
+	}
+	
+	.custon-link:hover { 
+	    background-color: #F5F5F5 !important;
+	}
+	
+	.nav-item-active {
+		background: #ff4081;
+	}
+	
+	.custon-content {
+	    position: relative;
+	    overflow: hidden;
+	}
+		
+</style>
+
+
+{% if request.user.is_authenticated %}
+	<header class="custon-drawer-header mdl-color--pink-50">
+		<div class="custon-avatar-cropper mdl-color--pink">
+			
+			{% if request.user.profile_image.url %}
+				<img src="{{request.user.profile_image.url}}" class="custon-avatar">
+			{% else %}
+				<img src="{% static 'manager/img/account-white.png' %}" class="custon-avatar">
+			{% endif %}
+		</div>
+		
+		<div class="custon-avatar-dropdown">
+			<span >{{request.user.email}}</span>
+			<div class="mdl-layout-spacer"></div>
+			<button id="accbtn" class="custon-change-user-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+				<i class="drawer-icon material-icons" role="presentation">arrow_drop_down</i>
+				<span class="visuallyhidden">Accounts</span>
+			</button>
+			
+			<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+				<a href="{% url 'logout' %}" style="text-decoration:none;">
+					<li class="drawer-menu-item mdl-menu__item">
+						<i class="drawer-icon material-icons" >exit_to_app</i>
+						{% trans 'Exit' %}
+					</li>
+				</a>
+			</ul>
+		</div>
+	</header>
+{% endif %}
+<nav class="custon-nav mdl-navigation mdl-color--white">
+	<a
+		class="{% if home %} mdl-color-text--pink custon-link-selected
+				{% else %} mdl-color-text--grey-700 custon-link-unselected
+				{% endif %} custon-link custon-content mdl-js-ripple-effect mdl-navigation__link"
+				href="{% url 'home' %}">
+		<span class="mdl-ripple"></span>
+		<i class="drawer-icon material-icons" role="presentation">home</i>{% trans 'Home' %}</a>
+</nav>

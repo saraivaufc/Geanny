@@ -1,0 +1,75 @@
+{% extends "manager/base-clean.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block other-head %}
+	{{ block.super }}
+	<link rel="stylesheet" href="{% static 'manager/css/screen-event.css' %}">
+{% endblock %}
+
+{% block content %}
+	
+	<style>
+
+		.event-background-image {
+			background-image:url("{% static 'manager/img/teste.jpg' %}");
+			background-repeat:no-repeat;
+			background-size: 100% auto;
+			
+			background-color: #CCC;
+			
+		}
+		
+		.event-page {
+			height: 2000px;
+			overflow: visible;
+			padding: 40px;
+		}
+		
+		.event-image-reference {
+			width: 80%;
+			height: 100%;
+			visibility: hidden;
+		}
+		
+		.event-fab {
+			position: absolute;
+			right: 3%;
+			top: -26px;
+		}
+		
+		.mdl-typography--display-3 {
+			font-weight: 100;
+		}
+		
+	</style>
+	
+	<div class="event-background-image event-main-grid mdl-grid mdl-color--grey-100" data-stellar-background-ratio="0.625">
+	
+		<div class="mdl-cell mdl-cell--12-col">
+			<img id="event-image-reference" class="event-image-reference" src="{% static 'manager/img/logo1.png' %}"></img>
+		</div>
+	
+		<div class="mdl-cell mdl-cell--1-col"></div>
+		<div id="event-page" class="event-page mdl-cell mdl-cell--10-col mdl-card mdl-shadow--2dp">
+			
+			<button id="event-fab" class="event-fab mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+				<i class="material-icons">person_add</i>
+			</button>
+			<div class="mdl-tooltip" for="event-fab">
+				{% trans 'Subscribe' %}
+			</div>
+			
+			<h1 class="mdl-typography--display-3">Event Title</h1>
+						
+		</div>
+		<div class="mdl-cell mdl-cell--1-col"></div>
+	
+	</div>
+
+{% endblock %}
+
+{% block other-script %}
+	{{ block.super }}
+	<script src="{% static 'manager/js/screen-event.js' %}"></script>
+{% endblock %}

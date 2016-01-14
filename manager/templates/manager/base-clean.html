@@ -1,7 +1,9 @@
 {% extends "manager/base-main.html" %}
 {% load i18n %}
 {% block main-content %}
-    <div class="container">
-        {% block content %}{% endblock %}
-    </div>
+	<div id="clean-root-layout" class="mdl-layout mdl-js-layout">
+	    <main id="clean-layout" class="mdl-layout__content mdl-color--grey-100">
+	        {% block content %}{% endblock %}
+	    </main>
+	</div>
 {% endblock %}
