@@ -14,33 +14,11 @@
 	</style>
 
 	<div class="mdl-grid">
-<<<<<<< HEAD
+
 		<div class="mdl-cell mdl-cell--11-col centered-container mdl-grid ">
 			
 			{% for index in 10|range %}
 				{% include 'manager/cards/card-event-item.html' %}				
-=======
-		<div class="mdl-cell mdl-cell--9-col centered-container mdl-grid ">
-			{% for event in events %}
-				<div class="mdl-cell mdl-cell--4-col">
-					<div class="event-card-square mdl-card mdl-shadow--2dp">
-					  <div class="mdl-card__title mdl-card--expand back-image">
-					    <h2 class="mdl-card__title-text mdl-color-text--white">{{ event.get_name }}</h2>
-					  </div>
-					  <div class="mdl-card__supporting-text">
-					    {{ event.get_description }}
-					  </div>
-					  <div class="mdl-card__actions mdl-card--border">
-					    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-					      {% trans "Subscribe" %}
-					    </a>
-					    <a href="{% url 'content_event_see' event.id %}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-					      {% trans "See more" %}
-					    </a>
-					  </div>
-					</div>
-				</div>
->>>>>>> 91e45e43a10dc5a5ccbadd45ca9a05784d41ebb8
 			{% empty %}
 				<p>{% trans 'No events' %}</p>
 			{% endfor %}
