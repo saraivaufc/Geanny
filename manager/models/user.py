@@ -1,10 +1,11 @@
 from django.db import models
+from django.conf import settings
 
 # -*- coding: UTF-8 -*-
 
 from django.utils.translation import ugettext_lazy as _
-
 from django.db import models
+from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
@@ -17,6 +18,23 @@ try:
 except:
     from md5 import new as md5
 
+class PersonManager(UserManager):
+    def create_user(self, username, password=None, group='attendee'):
+        print 'create_user'
+        email = username + '@email.com'
+        user = self.model(
+            username    = username,
+            email       = email,
+        )
+        user.set_password(password)
+        user.save(group= group)
+        return user
+
+    def create_superuser(self, username, password):
+        print 'create_superuser'
+        user = self.create_user(username, password, 'organizer')
+        return user
+
 class AbstractSystemPerson(models.Model):
     location = models.CharField(_(u"location"), max_length=75, blank=True, null=True)
     last_seen = models.DateTimeField(_(u"last seen"), auto_now=True)
@@ -24,6 +42,7 @@ class AbstractSystemPerson(models.Model):
     is_administrator = models.BooleanField(_('administrator status'), default=False,blank=True )
     is_moderator = models.BooleanField(_('moderator status'), default=False, blank=True)
     
+
     def get_location(self):
         return self.location
     
@@ -56,7 +75,7 @@ class AbstractPerson(AbstractBaseUser, PermissionsMixin, AbstractSystemPerson):
     is_active = models.BooleanField(_('active'), default=True,
                                     help_text=_(u'Designates whether this user should be treated as active. Unselect this instead of deleting accounts.'))
     date_joined = models.DateTimeField(_(u'date joined'), default=timezone.now)
-    objects = UserManager()
+    objects = PersonManager()
 
     def get_first_name(self):
         return self.first_name
@@ -105,7 +124,6 @@ class Person(AbstractPerson):
     address = models.CharField(verbose_name=_('Address'), max_length=200, blank=True, null=True)
     exists = models.BooleanField(default = True)
 
-    USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
 
     def get_name(self):
@@ -142,8 +160,8 @@ class Person(AbstractPerson):
         swappable = 'AUTH_USER_MODEL'
         app_label = 'manager'
         ordering = ['-date_joined', ]
-        verbose_name = _(u'person')
-        verbose_name_plural = _(u'persons')
+        verbose_name = _(u'Person')
+        verbose_name_plural = _(u'Persons')
    
 class Attendee(Person):
 

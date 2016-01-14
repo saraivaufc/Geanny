@@ -56,7 +56,11 @@ THIRD_PARTY_APPS = (
 	'rosetta',
 	'nocaptcha_recaptcha',
 	'social.apps.django_app.default',
+	'cep',
+	'paypal.standard.ipn',
 )
+
+PAYPAL_RECEIVER_EMAIL = "saraiva.ufc@gmail.com"
 
 LOCAL_APPS = (
 	'manager',
@@ -125,8 +129,8 @@ AUTHENTICATION_BACKENDS = (
 
 AUTH_USER_MODEL = 'manager.Person'
 
-LOGIN_URL = '/account/login/'
-LOGOUT_URL = '/account/logout/'
+LOGIN_URL = '/accounts/login/'
+LOGOUT_URL = '/accounts/logout/'
 
 #Recaptca
 NORECAPTCHA_SITE_KEY  = "6LdVnQ0TAAAAAAwnuLsezpZwIRFhdqs-yrwdmG3n"

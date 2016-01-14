@@ -1,1 +1,51 @@
-<h1>Administracion</h1>
+{% extends 'manager/base-webpage.html' %}
+
+{% load staticfiles %}
+{% load manager_tags %}
+{% load i18n %}
+
+{% block other-head %}
+	{{ block.super }}
+	<link rel="stylesheet" href="{% static 'manager/css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+	<style>
+	.back-image {
+		background-image:url("{% static 'manager/img/teste.jpg' %}");
+		background-repeat:no-repeat;
+		background-size:100%;
+		background-position: center;
+	}
+	</style>
+
+	<div class="mdl-grid">
+	<h1>Administor</h1>
+	<a href="{% url 'event_add' %}">Add event</a>
+		<div class="mdl-cell mdl-cell--9-col centered-container mdl-grid ">
+			{% for event in events %}
+				<div class="mdl-cell mdl-cell--4-col">
+					<div class="event-card-square mdl-card mdl-shadow--2dp">
+					  <div class="mdl-card__title mdl-card--expand back-image">
+					    <h2 class="mdl-card__title-text mdl-color-text--white">{{ event.get_name }}</h2>
+					  </div>
+					  <div class="mdl-card__supporting-text">
+					    {{ event.get_description }}
+					  </div>
+					  <div class="mdl-card__actions mdl-card--border">
+					    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+					      {% trans "Subscribe" %}
+					    </a>
+					    <a href="{% url 'event_see' event.id %}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+					      {% trans "See more" %}
+					    </a>
+					  </div>
+					</div>
+				</div>
+			{% empty %}
+				<p>Sem eventos</p>
+			{% endfor %}
+		</div>
+	</div>
+
+{% endblock %}

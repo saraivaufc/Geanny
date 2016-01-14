@@ -58,10 +58,6 @@ target/
 # PYC
 *.pyc
 
-#Databse
-*.sqlite3
-*.sqlite
-*.database
 # Eclipse project
 .project
 .pydevproject

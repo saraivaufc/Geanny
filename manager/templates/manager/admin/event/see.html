@@ -1,0 +1,10 @@
+{% extends 'manager/base-webpage.html' %}
+
+{% block content %}
+	<h1>See event</h1>
+	<div class="mdl-grid">
+	<p>{{ event.get_name }}</p></br>
+	<p>{{ event.get_description }}</p></br>
+	<p>{{ event.get_start_date }}</p>
+	</div>
+{% endblock %}

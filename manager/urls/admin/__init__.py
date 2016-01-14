@@ -5,6 +5,6 @@ from manager.views.index import Index
 index = Index()
 
 urlpatterns = patterns('',
-	url(r'^$', index.home),
-	url(r'^home/$', index.home, name="home"),
+	url(r'^$', index.admin, name="admin"),
+    url(r'^event/', include('manager.urls.admin.event')),
 )

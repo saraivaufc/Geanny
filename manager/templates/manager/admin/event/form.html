@@ -1,0 +1,10 @@
+{% extends 'manager/base-webpage.html' %}
+
+{% block content %}
+
+	<form action="{% url 'event_add' %}" method="POST">{% csrf_token %}
+		{% include 'manager/_render_form.html' %}
+		<button type="submit">submit</button>
+	</form>
+
+{% endblock %}
