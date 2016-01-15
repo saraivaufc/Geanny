@@ -1,61 +1,63 @@
 {% extends "manager/base-main.html" %}
+
+{% load staticfiles %}
 {% load i18n %}
 {% block main-content %}
-    <div class="container">
-        <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-			<!-- Barra superior -->
-				<header class="mdl-layout__header mdl-color--white mdl-color-text--grey-600">
-					<div class="mdl-layout__header-row">
-						<span class="mdl-layout-title"> {% block header-title %}{% endblock %} </span>
-						<div class="mdl-layout-spacer"></div>
-						{% block header-content %}{% endblock %}
-					</div>
-				</header>
-			<!-- Barra lateral -->
-				<div class="custon-drawer mdl-layout__drawer mdl-color--grey-100 mdl-color-text--grey-700">
-					<header class="custon-drawer-header mdl-color--pink-50">
-						<div class="custon-avatar-cropper mdl-color--pink">
-							<img src="{% static 'img/ic_account_256px.png' %}" class="custon-avatar">
-						</div>
-						
-						<div class="custon-avatar-dropdown">
-							<span >{{ request.user.get_email }}</span>
-							<div class="mdl-layout-spacer"></div>
-							<button id="accbtn" class="custon-change-user-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-								<i class="material-icons" role="presentation">arrow_drop_down</i>
-								<span class="visuallyhidden">Accounts</span>
-							</button>
-							
-							<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
-								<li class="mdl-menu__item">hello@example.com</li>
-								<li class="mdl-menu__item">info@example.com</li>
-								<li class="mdl-menu__item"><i class="material-icons" >exit_to_app</i>sair</li>
-							</ul>
-						</div>
-					</header>
-					<nav class="custon-nav mdl-navigation mdl-color--white">
-						<a class="{% if home_active %}mdl-color-text--pink custon-link-selected{% else %}mdl-color-text--grey-700 custon-link-unselected{% endif %} custon-link custon-content mdl-js-ripple-effect mdl-navigation__link" href="{% url 'sistema_index' %}">
-							<span class="mdl-ripple"></span>
-							<i class="material-icons" role="presentation">home</i>Início
-						</a>
-						<a class="{% if alunos_active %}mdl-color-text--pink custon-link-selected{% else %}mdl-color-text--grey-700 custon-link-unselected{% endif %} custon-link custon-content mdl-js-ripple-effect mdl-navigation__link" href="{% url 'sistema_ver_alunos' %}">
-							<span class="mdl-ripple"></span>
-							<i class="material-icons" role="presentation">group</i>Usuários
-						</a>
-						<a class="{% if cursos_active %}mdl-color-text--pink custon-link-selected{% else %}mdl-color-text--grey-700 custon-link-unselected{% endif %} custon-link custon-content mdl-js-ripple-effect mdl-navigation__link" href="{% url 'sistema_ver_cursos' %}">
-							<span class="mdl-ripple"></span>
-							<i class="material-icons" role="presentation">school</i>Cursos
-						</a>
-						<div class="mdl-layout-spacer"></div>
-						<a class="{% if sobre_active %}mdl-color-text--pink custon-link-selected{% else %}mdl-color-text--grey-700 custon-link-unselected{% endif %} custon-link custon-content mdl-js-ripple-effect mdl-navigation__link" href="">
-							<span class="mdl-ripple"></span>
-							<i class="material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span>
-						</a>
-					</nav>
-				</div>
-				
-		<main class="custon-main mdl-layout__content mdl-color--grey-100">
-			{% block content %}{% endblock %}
-		</main>
-    </div>
+	
+	<style>
+
+		.dashboard-navbar {
+			position: relative;
+		}
+
+		.logo-name-header {
+			height: 100%;
+		}
+		
+		.header-logo {
+			height: 80px;
+		}
+		
+		.ripple-container {
+		    position: relative;
+		    overflow: hidden;
+		}
+		
+		.link-selected {
+			border-bottom-width: 5px;
+			border-bottom-style: inset;	
+		}
+		
+		.mdl-navigation__link {
+			font-size: 24px;
+		}
+	
+	</style>
+	
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer">
+
+		<header class="mdl-layout__header">
+		
+		    <div class="mdl-layout__header-row header-logo mdl-color--white">
+		        
+		        <a class="logo-name-header" href="{% url 'content' %}"><img class="logo-name-header" src="{% static 'manager/img/logo.png' %}"></img></a>
+		        <div class="mdl-layout-spacer"></div>
+		        <nav class="mdl-navigation dashboard-navbar">	            
+		        	{% block nav-bar-content %}{% endblock %}		            	            
+		        </nav>
+		        
+		    </div>
+		    
+		</header>
+	    
+	    
+		{% include 'manager/navigation-drawer/navigation-drawer-admin.html' %}
+	    
+	    	    
+	    <main class="mdl-layout__content mdl-color--grey-100">
+	        {% block content %}{% endblock %}
+	    </main>
+
+	</div>
+	
 {% endblock %}

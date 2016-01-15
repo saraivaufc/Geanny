@@ -100,8 +100,8 @@
 	<header class="custon-drawer-header mdl-color--pink-50">
 		<div class="custon-avatar-cropper mdl-color--pink">
 			
-			{% if request.user.profile_image.url %}
-				<img src="{{request.user.profile_image.url}}" class="custon-avatar">
+			{% if request.user.get_profile_image %}
+				<img src="{{request.user.get_profile_image.url}}" class="custon-avatar">
 			{% else %}
 				<img src="{% static 'manager/img/account-white.png' %}" class="custon-avatar">
 			{% endif %}
@@ -126,12 +126,21 @@
 		</div>
 	</header>
 {% endif %}
+
 <nav class="custon-nav mdl-navigation mdl-color--white">
-	<a
-		class="{% if home %} mdl-color-text--pink custon-link-selected
-				{% else %} mdl-color-text--grey-700 custon-link-unselected
-				{% endif %} custon-link custon-content mdl-js-ripple-effect mdl-navigation__link"
-				href="{% url 'content' %}">
+
+	<a class="
+			{% if home %} mdl-color-text--pink custon-link-selected
+			{% else %} mdl-color-text--grey-700 custon-link-unselected
+			{% endif %} custon-link custon-content mdl-js-ripple-effect mdl-navigation__link"
+			href="{% url 'content' %}">
+			
 		<span class="mdl-ripple"></span>
-		<i class="drawer-icon material-icons" role="presentation">home</i>{% trans 'Home' %}</a>
+		<i class="drawer-icon material-icons" role="presentation">home</i>
+		{% trans 'Home' %}
+		
+	</a>
+	
+	{% block other-navigation-menu-item %}{% endblock %}
+	
 </nav>

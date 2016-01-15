@@ -1,28 +1,75 @@
-{% extends 'manager/base-webpage.html' %}
+{% extends "manager/base-clean.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block other-head %}
+	{{ block.super }}
+	<link rel="stylesheet" href="{% static 'manager/css/screen-event.css' %}">
+{% endblock %}
 
 {% block content %}
-	<h1>See event</h1>
-	<div class="mdl-grid">
-	<p>{{ event.get_name }}</p></br>
-	<p>{{ event.get_description }}</p></br>
-	<p>{{ event.get_start_date }}</p>
+	
+	<style>
+
+		.event-background-image {
+			background-image:url("{% static 'manager/img/teste.jpg' %}");
+			background-repeat:no-repeat;
+			background-size: 100% auto;
+			
+			background-color: #CCC;
+			
+		}
+		
+		.event-page {
+			height: 2000px;
+			overflow: visible;
+			padding: 40px;
+		}
+		
+		.event-image-reference {
+			width: 80%;
+			height: 100%;
+			visibility: hidden;
+		}
+		
+		.event-fab {
+			position: absolute;
+			right: 3%;
+			top: -26px;
+		}
+		
+		.mdl-typography--display-3 {
+			font-weight: 100;
+		}
+		
+	</style>
+	
+	<div class="event-background-image event-main-grid mdl-grid mdl-color--grey-100" data-stellar-background-ratio="0.625">
+	
+		<div class="mdl-cell mdl-cell--12-col">
+			<img id="event-image-reference" class="event-image-reference" src="{% static 'manager/img/logo1.png' %}"></img>
+		</div>
+	
+		<div class="mdl-cell mdl-cell--1-col"></div>
+		<div id="event-page" class="event-page mdl-cell mdl-cell--10-col mdl-card mdl-shadow--2dp">
+			
+			<button id="event-fab" class="event-fab mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+				<i class="material-icons">person_add</i>
+			</button>
+			<div class="mdl-tooltip" for="event-fab">
+				{% trans 'Subscribe' %}
+			</div>
+			
+			<h1 class="mdl-typography--display-3">Event Title</h1>
+						
+		</div>
+		<div class="mdl-cell mdl-cell--1-col"></div>
+	
 	</div>
 
-	<h3>Endereço:</h3>
-	<h1>{{ event.get_address }}</h1>
-	{% with  event.get_address as address %}
-	<p>{{ address.get_cep }}</p></br>
-	<p>{{ address.get_street }}</p></br>
-	<p>{{ address.get_district }}</p>
-	<p>{{ address.get_city }}</p>
-	<p>{{ address.get_state}}</p>
-	{% endwith %}
+{% endblock %}
 
-	<h1>Activities</h1>
-	<ul>
-	{% for activity in event.get_activities_active %}
-		<li>{{ activity.get_name }}<a href="{% url 'content_activity_see' activity.id %}">See</a></li>
-	{% endfor %}
-	</ul>
-	</div>
+{% block other-script %}
+	{{ block.super }}
+	<script src="{% static 'manager/js/screen-event.js' %}"></script>
 {% endblock %}
