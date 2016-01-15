@@ -1,0 +1,29 @@
+{% extends 'manager/base-webpage.html' %}
+
+{% load staticfiles %}
+{% load manager_tags %}
+{% load i18n %}
+
+{% block other-head %}
+	{{ block.super }}
+	<link rel="stylesheet" href="{% static 'manager/css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+
+	</style>
+
+	<div class="mdl-grid">
+	
+		<div class="mdl-cell mdl-cell--11-col centered-container mdl-grid ">
+			
+			{% for event in events %}
+				{% include 'manager/cards/card-event-item.html' %}				
+			{% empty %}
+				<h1 class="mdl-typography--display-1">{% trans 'No events' %}</h1>
+			{% endfor %}
+			
+		</div>
+	</div>
+
+{% endblock %}
