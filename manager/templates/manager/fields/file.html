@@ -1,4 +1,33 @@
-{% include 'manager/fields/caption.html' %}
 {% include 'manager/fields/errors.html' %}
-	{{ field }}
+
+<div class="geanny-file-input-field">
+	<div class="geanny-file-input-field-button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
+		
+		<i class="material-icons">file_upload</i>
+		
+	</div>
+	
+	<input class="geanny-file-input-field-hidden none"
+			{% if field.field.required %}required{% endif %}
+			name="{% if form.prefix %}{{form.prefix}}-{% endif %}{{ field.name }}"
+			type="file" id="hidden-{{ field.auto_id }}"
+			{% if field.value %}value="{{ field.value }}"{% endif %}/>
+	
+	<div id="" class="geanny-file-input-field-text mdl-textfield mdl-js-textfield mdl-textfield--floating-label geanny-form-field">
+		<input
+			class="geanny-file-input-field-input mdl-textfield__input"
+			type="text"
+			{% if field.field.required %}required{% endif %}
+			id="{{field.auto_id}}"
+			{% if field.value %} value="{{ field.value }}" {% endif %}/>
+		<label class="mdl-textfield__label" for="{{field.auto_id}}">
+			{{ field.label_tag }}
+			{% if field.field.required %} *{% endif %}
+		</label>
+	</div>
+
+</div>
+
 {% include 'manager/fields/help.html' %}
+
+<br/>

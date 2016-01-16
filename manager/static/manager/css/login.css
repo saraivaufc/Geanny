@@ -1,10 +1,10 @@
 .login-card {
 	margin: auto auto;
-	padding: 40px;
-	margin-top: 40px;
+	padding: 72px;
+	margin-top: 52px;
 }
 
-.mdl-textfield {
+.mdl-textfield-block {
 	width: 100%;
 }
 

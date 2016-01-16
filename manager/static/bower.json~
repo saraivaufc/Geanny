@@ -1,0 +1,27 @@
+{
+  "name": "geany-website",
+  "homepage": "https://github.com/saraivaufc/geanny",
+  "authors": [
+    "Felipe Pinho <felipe76857685@gmail.com>"
+  ],
+  "description": "Geany is a best and pretty events manager :)",
+  "main": "home.html",
+  "moduleType": [],
+  "keywords": [
+    "geany",
+    "event",
+    "manager"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "mdl-selectfield": "~0.0.3",
+  }
+}

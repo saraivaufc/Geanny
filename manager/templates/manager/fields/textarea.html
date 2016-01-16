@@ -1,12 +1,12 @@
 {% include 'manager/fields/errors.html' %}
 
-<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+<div class="mdl-textfield-block mdl-textfield mdl-js-textfield mdl-textfield--floating-label geanny-form-field">
 	
 	<textarea class="mdl-textfield__input"
 		{% if field.field.required %}required{% endif %}
 		name="{% if form.prefix %}{{form.prefix}}-{% endif %}{{ field.name }}"
 		type="text" id="{{ field.auto_id }}"
-		{% if field.value %}value="{{ field.value }}"{% endif %}></textarea>
+		{% if field.value %}value="{{ field.value }}"{% endif %}>{{field.value}}</textarea>
 		
 	{% include 'manager/fields/caption.html' %}
 	

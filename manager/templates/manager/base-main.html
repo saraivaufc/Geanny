@@ -8,10 +8,14 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
+        <link rel="stylesheet" href="{% static 'bower_components/mdl-selectfield/mdl-selectfield.min.css' %}" type="text/css">
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        
         <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.blue_grey-pink.min.css" />
         <link rel="stylesheet" href="http://cdn.materialdesignicons.com/1.4.57/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" type="text/css">
+        <link rel="stylesheet" href="{% static 'manager/css/form.css' %}" type="text/css">
         
         {% block other-head %}{% endblock %}
     {% endblock %}
@@ -20,7 +24,7 @@
 {% block navbar %}
     {% if messages %}
         {% for message in messages %}
-           {{ message }}
+           <div class="geanny-alert-message">{{ message }}</div>
         {% endfor %}
     {% endif %}
 
@@ -34,6 +38,15 @@
 	<script src="{% static 'manager/frameworks/mdl/material.min.js' %}"></script>
 	<script src="{% static 'manager/js/jquery-1.12.0.js' %}"></script>
 	<script src="{% static 'manager/js/stellar.js' %}"></script>
+	<script src="{% static 'bower_components/mdl-selectfield/mdl-selectfield.min.js' %}"></script>
+	<script src="{% static 'manager/frameworks/moment/moment.js' %}"></script>
+	
+	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	
+	<script src="{% static 'manager/js/form.js' %}"></script>
+	<script src="{% static 'manager/js/popup.js' %}"></script>
+	
     {% block other-script %}{% endblock %}
 {% endblock %}
 

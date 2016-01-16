@@ -1,5 +1,13 @@
 {% extends 'manager/base-webpage.html' %}
 
+{% load staticfiles %}
+{% load i18n %}
+
+{% block other-head %}
+	{{ block.super }}
+	<link rel="stylesheet" href="{% static 'manager/css/login.css' %}">
+{% endblock %}
+
 {% block content %}
 
 	<form action="{% if type == 'add' %}
@@ -9,13 +17,20 @@
 				  {% else %}
 				  	.
 				  {% endif %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
-		{% with form_event as form %}
-			{% include 'manager/_render_form.html' %}
-		{% endwith %}
-		{% with form_address as form %}
-			{% include 'manager/_render_form.html' %}
-		{% endwith %}
-		<button type="submit">submit</button>
+				  
+		<div class="mdl-grid">
+			<div class="mdl-cell--10-col mdl-color--white mdl-shadow--2dp login-card">
+				  
+				{% with form_event as form %}
+					{% include 'manager/_render_form.html' %}
+				{% endwith %}
+				{% with form_address as form %}
+					{% include 'manager/_render_form.html' %}
+				{% endwith %}
+				<button class="submit-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent" type="submit">{% trans "Adicionar" %}</button>
+				
+				
+			</div>
+		</div>
 	</form>
-
 {% endblock %}

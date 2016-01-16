@@ -1,7 +1,16 @@
-{% include 'manager/fields/caption.html' %}
 {% include 'manager/fields/errors.html' %}
-<label class="input-control switch">
-    {{ field }}
-    <span class="check"></span>
+
+<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="{{field.auto_id}}">
+	
+	<input class="mdl-switch__input"
+		name="{% if form.prefix %}{{form.prefix}}-{% endif %}{{ field.name }}"
+		type="checkbox"
+		id="{{ field.auto_id }}"/>
+	
+	<span class="mdl-switch__label">{{field.label_tag}}</span>
+	
+	{% include 'manager/fields/caption.html' %}
+	
 </label>
+
 {% include 'manager/fields/help.html' %}

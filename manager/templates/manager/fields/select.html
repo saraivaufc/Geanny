@@ -1,6 +1,37 @@
-{% include 'manager/fields/caption.html' %}
 {% include 'manager/fields/errors.html' %}
-	<div class="input-control full-size" data-role="select">
-	    {{ field }}
-	</div>
+
+<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
+	
+	<select class="mdl-selectfield__select"
+		for="demo-menu-lower-left" 
+		{% if field.field.required %}required{% endif %}
+		name="{% if form.prefix %}{{form.prefix}}-{% endif %}{{ field.name }}"
+		id="{{ field.auto_id }}"
+		{% if field.value %}value="{{ field.value }}"{% endif %}>
+		
+		{% for c in field.field.choices %}
+			{% if c.0 == '' %}
+				<option value="{{c.0}}"></option>
+			{% elif c.0 == field.value %}
+				<option selected value="{{c.0}}">{{c.1}}</option>
+			{% else %}
+				<option value="{{c.0}}">{{c.1}}</option>
+			{% endif %}
+		
+		{% endfor %}
+		
+	</select>
+		
+	<label class="mdl-selectfield__label" for="{{ field.auto_id }}">
+
+		{{field.label_tag}}
+		
+		{% if field.field.required %}*{% endif %}
+		
+	</label>
+	
+</div>
+
 {% include 'manager/fields/help.html' %}
+
+<br />
