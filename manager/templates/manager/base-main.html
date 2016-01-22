@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" type="text/css">
         <link rel="stylesheet" href="{% static 'manager/css/form.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% static 'manager/css/popup.css' %}" type="text/css">
         
         {% block other-head %}{% endblock %}
     {% endblock %}
@@ -35,14 +36,14 @@
 {% endblock %}
 
 {% block script %}
-	<script src="{% static 'manager/frameworks/mdl/material.min.js' %}"></script>
 	<script src="{% static 'manager/js/jquery-1.12.0.js' %}"></script>
+	<!-- script src="http://code.jquery.com/jquery-1.10.2.js"></script -->
+  	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  	
+	<script src="{% static 'manager/frameworks/mdl/material.min.js' %}"></script>
 	<script src="{% static 'manager/js/stellar.js' %}"></script>
 	<script src="{% static 'bower_components/mdl-selectfield/mdl-selectfield.min.js' %}"></script>
 	<script src="{% static 'manager/frameworks/moment/moment.js' %}"></script>
-	
-	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-  	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	
 	<script src="{% static 'manager/js/form.js' %}"></script>
 	<script src="{% static 'manager/js/popup.js' %}"></script>

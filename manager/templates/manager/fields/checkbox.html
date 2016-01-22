@@ -5,7 +5,8 @@
 	<input class="mdl-switch__input"
 		name="{% if form.prefix %}{{form.prefix}}-{% endif %}{{ field.name }}"
 		type="checkbox"
-		id="{{ field.auto_id }}"/>
+		id="{{ field.auto_id }}"
+		{% if field.value %}checked{% endif %}/>
 	
 	<span class="mdl-switch__label">{{field.label_tag}}</span>
 	

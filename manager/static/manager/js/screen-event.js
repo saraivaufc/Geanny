@@ -1,16 +1,15 @@
 $( document ).ready(function() {
 	updateScroll();
-	$('#clean-layout').stellar();
+	$('#scroll-layout').stellar();
 });
 
 function updateScroll() {
 	var $img = $('#event-image-reference');
 	var mt = parseInt($img.css('height').replace("px", ""))
 	
-	var $scrollContainer = $('#clean-layout');
+	var $scrollContainer = $('#scroll-layout');
 	
 	setTimeout(function() {
-		//$scrollContainer.scrollTop(mt * 0.8);
 		$scrollContainer.animate({
 		        scrollTop: mt * 0.8
 		    }, 1000);

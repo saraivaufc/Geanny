@@ -6,13 +6,16 @@ var options = {
 				$(this).get(0).MaterialTextfield.checkValidity();
 			});
 		}, 
-		dateFormat: "yyyy/mm/dd"
+		dateFormat: "dd/mm/yy"
 };
 
 componentHandler.registerUpgradedCallback("MaterialLayout", function(elem) {
-	$(".geanny-form-field").get(0).MaterialTextfield.checkDirty();
-	$(".geanny-form-field").get(0).MaterialTextfield.checkDisabled();
-	$(".geanny-form-field").get(0).MaterialTextfield.checkValidity();
+	
+	if($(".geanny-form-field").get(0) != undefined) {
+		$(".geanny-form-field").get(0).MaterialTextfield.checkDirty();
+		$(".geanny-form-field").get(0).MaterialTextfield.checkDisabled();
+		$(".geanny-form-field").get(0).MaterialTextfield.checkValidity();
+	}
 	
 	$(".geanny-form-field-password").addClass("is-dirty");
 	
@@ -31,5 +34,6 @@ componentHandler.registerUpgradedCallback("MaterialLayout", function(elem) {
 			$field.find(".geanny-file-input-field-hidden").click()
 		});
 	});
+		
 });
 

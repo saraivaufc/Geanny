@@ -1,9 +1,11 @@
 componentHandler.registerUpgradedCallback("MaterialLayout", function(elem) {
-	
 	$(".geanny-alert-message").each(function() {
-		
+		var text = $(this).text();
+		$(this).text("");
+		showInfo(text, 5000, function() {
+			
+		})
 	});
-	
 });
 
 function showInfo(message, delay, callBack) {
@@ -16,7 +18,11 @@ function showError(message, delay, callBack) {
 
 function showToast(message, delay, iconFont, lineColor, textColor, callBack) {
     'use strict';
-    var snackbar = document.createElement('div'), text = document.createElement('span'), icon = document.createElement('i'), line = document.createElement('div');
+    var snackbar = document.createElement('div'),
+    	text = document.createElement('span'),
+    	icon = document.createElement('i'), 
+    	line = document.createElement('div');
+    
     snackbar.classList.add('mdl-snackbar');
     snackbar.classList.add('mdl-color--white');
     snackbar.classList.add('mdl-shadow--2dp');

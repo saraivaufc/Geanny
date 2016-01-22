@@ -37,4 +37,13 @@ def settings_value(name):
 
 @register.filter(name='parameters') 
 def parameters(function, *args):
-	print args
+    print args
+
+@register.filter(name='is_organizer')
+def is_organizer(user):
+    return user.groups.filter(name='organizer').exists()
+
+
+@register.filter(name='is_attendee')
+def is_attendee(user):
+    return user.groups.filter(name='attendee').exists()
