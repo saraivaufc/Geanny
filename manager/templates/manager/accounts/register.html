@@ -1,9 +1,24 @@
 {% extends 'manager/base-webpage.html' %}
 
+{% load staticfiles %}
+{% load i18n %}
+
+{% block other-head %}
+	{{ block.super }}
+	<link rel="stylesheet" href="{% static 'manager/css/login.css' %}">
+{% endblock %}
+
 {% block content %}
-	<form action="{% url 'register' %}" method="POST">{% csrf_token %}
-		{% include 'manager/_render_form.html' %}
-		<button type="submit">submit</button>
-	</form>
-	<a href="{% url 'login' %}">Returno to login</a>
+
+	<div class="mdl-grid">
+		<div class="mdl-cell--4-col mdl-color--white mdl-shadow--2dp login-card">
+		
+			<form action="{% url 'register' %}" method="POST">{% csrf_token %}
+				{% include 'manager/_render_form.html' %}
+				<button class="submit-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent" type="submit">{% trans "Cadastrar" %}</button>
+			</form>
+			<a href="{% url 'login' %}">Returno to login</a>
+		
+		</div>
+	</div>
 {% endblock %}

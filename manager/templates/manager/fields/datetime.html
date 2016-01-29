@@ -1,7 +1,16 @@
-{% include 'manager/fields/caption.html' %}
 {% include 'manager/fields/errors.html' %}
-<div class="input-control text" data-role="datepicker">
-    {{ field }}
-    <button class="button"><span class="mif-calendar"></span></button>
+
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label geanny-form-field geanny-form-field-date">
+	
+	<input class="mdl-textfield__input geanny-form-field-date-input"
+		{% if field.field.required %}required{% endif %} 
+		name="{% if form.prefix %}{{form.prefix}}-{% endif %}{{ field.name }}" 
+		type="text"
+		id="{{field.auto_id}}"
+		{% if field.value %}value="{{field.value}}"{% endif %}/>
+		
+	{% include 'manager/fields/caption.html' %}
+	
 </div>
+
 {% include 'manager/fields/help.html' %}

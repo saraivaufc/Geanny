@@ -50,7 +50,7 @@
 			text-align: justify;
 		}
 				
-		.event-container-top{
+		.event-container-top {
 			width: 100%;
 		}
 		
@@ -59,6 +59,11 @@
 			height: 1px;
 			margin-top: 24px;
 			margin-bottom: 24px;
+		}
+		
+		.activities-container {
+			width: 100%;
+			position: relative;
 		}
 		
 	</style>
@@ -77,9 +82,6 @@
 			<div>
 				<a href="{% url 'admin_event_edit' event.id %}" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--pink">
 				  {% trans 'Change' %}
-				</a>
-				<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--pink">
-				  {% trans 'Activities' %}
 				</a>
 				<a href="{% url 'admin_event_remove' event.id %}" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--pink">
 				  {% trans 'Delete event' %}
@@ -120,9 +122,23 @@
 		
 		<!-- Other card -->
 		<div class="mdl-cell mdl-cell--1-col"></div>
-		<div id="event-page" class="event-page mdl-cell mdl-cell--10-col mdl-card mdl-shadow--2dp">
+		<div class="event-page mdl-cell mdl-cell--10-col mdl-card mdl-shadow--2dp">
+		
+			<div>
+				<a href="{% url 'admin_activity_add' event.id %}" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--pink">
+				  {% trans 'Add Activity' %}
+				</a>
+			</div>
 			
+			<div class="horizontal-line mdl-color--grey-400"></div>
+		
+			<div class="mdl-grid activities-container">
+				
+				{% for activity in event.get_activities %}
+					{% include 'manager/cards/card-activity-item.html' %}
+				{% endfor %}
 			
+			</div>
 						
 		</div>
 		<div class="mdl-cell mdl-cell--1-col"></div>
