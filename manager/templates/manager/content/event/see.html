@@ -53,6 +53,11 @@
 			width: 100%;
 		}
 		
+		.activities-container {
+			width: 100%;
+			position: relative;
+		}
+		
 		
 	</style>
 		
@@ -106,9 +111,15 @@
 		
 		<!-- Other card -->
 		<div class="mdl-cell mdl-cell--1-col"></div>
-		<div id="event-page" class="event-page mdl-cell mdl-cell--10-col mdl-card mdl-shadow--2dp">
+		<div class="event-page mdl-cell mdl-cell--10-col mdl-card mdl-shadow--2dp">
+		
+			<div class="mdl-grid activities-container">
+				
+				{% for activity in event.get_activities %}
+					{% include 'manager/cards/card-activity-item.html' %}
+				{% endfor %}
 			
-			
+			</div>
 						
 		</div>
 		<div class="mdl-cell mdl-cell--1-col"></div>

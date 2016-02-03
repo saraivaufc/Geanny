@@ -1,9 +1,100 @@
-{% extends 'manager/base-webpage.html' %}
+{% extends "manager/base-clean.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load manager_tags %}
+
+{% block other-head %}
+	{{ block.super }}
+	<link rel="stylesheet" href="{% static 'manager/css/screen-event.css' %}">
+{% endblock %}
 
 {% block content %}
-	<h1>See activity</h1>
-	<div class="mdl-grid">
-	<p>{{ activity.get_name }}</p></br>
-	<p>{{ activity.get_description }}</p></br>
+	
+	<style>
+
+		.activity-background-image {
+			
+			{% if activity.get_image %}
+				background-image:url("{{activity.get_image.url}}");
+			{% endif %}
+			background-repeat:no-repeat;
+			background-size: 100% auto;
+			
+			background-color: #CCC;
+			
+		}
+		
+		.activity-page {
+			overflow: visible;
+			padding: 40px;
+		}
+		
+		.activity-image-reference {
+			width: 80%;
+			height: 100%;
+			visibility: hidden;
+		}
+		
+		.activity-fab {
+			position: absolute;
+			right: 3%;
+			top: -26px;
+		}
+		
+		.mdl-typography--display-3 {
+			font-weight: 100;
+		}
+		
+		.paragraph {
+			text-align: justify;
+		}
+		
+		.activity-container-top{
+			width: 100%;
+		}
+		
+		.activities-container {
+			width: 100%;
+			position: relative;
+		}
+		
+		
+	</style>
+		
+	<div class="activity-background-image event-main-grid mdl-grid mdl-color--grey-100" data-stellar-background-ratio="0.625">
+	
+		<div class="mdl-cell mdl-cell--12-col">
+			<img id="event-image-reference" class="activity-image-reference" src="{% static 'manager/img/logo1.png' %}"></img>
+		</div>
+	
+		<!-- Name and description -->
+		
+		<div class="mdl-cell mdl-cell--1-col"></div>
+		<div id="activity-page" class="activity-page mdl-cell mdl-cell--10-col mdl-card mdl-shadow--2dp">
+			
+			<div class="mdl-tooltip" for="event-fab">
+				{% trans 'Subscribe' %}
+			</div>
+			
+			<label class="mdl-typography--display-1">{{activity.get_name}}</label>
+			
+			<label class="mdl-typography--body-1">{% trans 'Start time' %}</label>
+			<label class="mdl-typography--title">{{activity.get_start_hour}}</label>
+			
+			<label class="mdl-typography--body-1">{% trans 'End time' %}</label>
+			<label class="mdl-typography--title">{{activity.get_end_hour}}</label>
+			
+			<br />
+			
+			<p class="paragraph mdl-typography--body-1">{{activity.get_description}}</p>
+						
+		</div>
+	
 	</div>
+
+{% endblock %}
+
+{% block other-script %}
+	{{ block.super }}
+	<script src="{% static 'manager/js/screen-event.js' %}"></script>
 {% endblock %}
